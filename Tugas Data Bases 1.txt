@@ -1,0 +1,127 @@
+Setting environment for using XAMPP for Windows.
+ASUS@LAPTOP-F3CPJ02Q c:\xampp
+#  mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| dbkuliah           |
+| dbkuliah_pathi     |
+| dbti02             |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+8 rows in set (0.020 sec)
+
+MariaDB [(none)]> USE dbkuliah_pathi;
+Database changed
+MariaDB [dbkuliah_pathi]>  CREATE TABLE jurusan(
+    -> id int primary key auto_increment not null,
+    -> nama varchar(30) not null unique);
+Query OK, 0 rows affected (0.041 sec)
+
+MariaDB [dbkuliah_pathi]>  DESC jurusan;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama  | varchar(30) | NO   | UNI | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.029 sec)
+
+MariaDB [dbkuliah_pathi]>  CREATE TABLE mahasiswa(
+    -> id int primary key auto_increment not null,
+    -> nim int not null,
+    -> nama varchar(50) not null,
+    -> alamat varchar(100) not null,
+    -> idjurusan int not null,
+    -> foto varchar(50) not null);
+Query OK, 0 rows affected (0.024 sec)
+
+MariaDB [dbkuliah_pathi]> DESC mahasiswa;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| id        | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nim       | int(11)      | NO   |     | NULL    |                |
+| nama      | varchar(50)  | NO   |     | NULL    |                |
+| alamat    | varchar(100) | NO   |     | NULL    |                |
+| idjurusan | int(11)      | NO   |     | NULL    |                |
+| foto      | varchar(50)  | NO   |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+6 rows in set (0.027 sec)
+
+MariaDB [dbkuliah_pathi]> SHOW TABLES;
++--------------------------+
+| Tables_in_dbkuliah_pathi |
++--------------------------+
+| jurusan                  |
+| mahasiswa                |
++--------------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [dbkuliah_pathi]> INSERT INTO jurusan (nama) VALUES
+    -> ('Teknik Informatika'),('Sistem Informasi'),('Bisnis Digital'),('Teknik Elektro'),('Teknik Mesin');
+Query OK, 5 rows affected (0.026 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [dbkuliah_pathi]> SELECT * FROM jurusan;
++----+--------------------+
+| id | nama               |
++----+--------------------+
+|  3 | Bisnis Digital     |
+|  2 | Sistem Informasi   |
+|  4 | Teknik Elektro     |
+|  1 | Teknik Informatika |
+|  5 | Teknik Mesin       |
++----+--------------------+
+5 rows in set (0.014 sec)
+
+MariaDB [dbkuliah_pathi]> INSERT INTO mahasiswa (nim,nama,alamat,idjurusan,foto) VALUES
+    ->  (0110223068,'Pathi','Pagutan',1,'pathi.jpg'),
+    ->  (0110123092,'Amanda Aprilia','Bojong Gede',2,'manda.jpg'),
+    ->  (0110123023,'Gita Tri Lestari','Jasinga',2,'gita.png'),
+    ->  (0110223054,'Eka Kartini','Ciapus',3,'eka.png');
+Query OK, 4 rows affected (0.019 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [dbkuliah_pathi]> SELECT * FROM mahasiswa;
++----+-----------+------------------+-------------+-----------+-----------+
+| id | nim       | nama             | alamat      | idjurusan | foto      |
++----+-----------+------------------+-------------+-----------+-----------+
+|  1 | 110223068 | Pathi            | Pagutan     |         1 | pathi.jpg |
+|  2 | 110123092 | Amanda Aprilia   | Bojong Gede |         2 | manda.jpg |
+|  3 | 110123023 | Gita Tri Lestari | Jasinga     |         2 | gita.png  |
+|  4 | 110223054 | Eka Kartini      | Ciapus      |         3 | eka.png   |
++----+-----------+------------------+-------------+-----------+-----------+
+4 rows in set (0.002 sec)
+
+MariaDB [dbkuliah_pathi]> INSERT INTO mahasiswa (nim,nama,alamat,idjurusan,foto) VALUES
+    ->  (0110223052,'Diah Ayu Puspasari','Bogor',4,'diah.png');
+Query OK, 1 row affected (0.018 sec)
+
+MariaDB [dbkuliah_pathi]> SELECT * FROM mahasiswa;
++----+-----------+--------------------+-------------+-----------+-----------+
+| id | nim       | nama               | alamat      | idjurusan | foto      |
++----+-----------+--------------------+-------------+-----------+-----------+
+|  1 | 110223068 | Pathi              | Pagutan     |         1 | pathi.jpg |
+|  2 | 110123092 | Amanda Aprilia     | Bojong Gede |         2 | manda.jpg |
+|  3 | 110123023 | Gita Tri Lestari   | Jasinga     |         2 | gita.png  |
+|  4 | 110223054 | Eka Kartini        | Ciapus      |         3 | eka.png   |
+|  5 | 110223052 | Diah Ayu Puspasari | Bogor       |         4 | diah.png  |
++----+-----------+--------------------+-------------+-----------+-----------+
+5 rows in set (0.000 sec)
+
+MariaDB [dbkuliah_pathi]>
